@@ -1,101 +1,120 @@
+'use client';
+
 import Image from "next/image";
+import {
+    Card,
+    CardContent,
+    CardMedia,
+    Container,
+    Typography,
+    useMediaQuery
+} from "@mui/material";
+import {useTheme} from "@mui/material/styles";
+import {Masonry} from "@mui/lab";
+import UploadModal from "@/components/ModalComponent";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    const theme = useTheme();
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
+    const columns = isSmallScreen ? 1 : 3;
+    const itemData = [
+        {
+            src: "https://assets.teenvogue.com/photos/66159ed9db21f3a8c3c35fd1/master/w_1600,c_limit/ILLIT_first%20week_1.jpg",
+            width: 1600,
+            height: 1200,
+            likes: 300,
+        },
+        {
+            src: "https://assets.teenvogue.com/photos/66159eef540395ea08670ec2/2:3/w_1332,h_1998,c_limit/ILLIT_MV%20behind_all.jpg",
+            width: 600,
+            height: 900,
+            likes: 200,
+        }
+    ];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
-}
+    return (
+        <Container maxWidth="lg" sx={{p: 4}}>
+            <Masonry columns={columns} spacing={2}>
+                <Card
+                    key={100}
+                    sx={{
+                        position: 'relative',
+                        overflow: 'hidden',
+                        '&:hover .image': {
+                            transform: 'scale(1.1)',
+                        }
+                    }}
+                >
+                    <CardMedia>
+                        <Image
+                            className="image"
+                            src={"/images/hero.png"}
+                            alt={""}
+                            layout="responsive"
+                            width={600}
+                            height={900}
+                            style={{
+                                transition: "transform 0.3s ease-in-out",
+                                position: "relative"
+                            }}
+                        />
+                    </CardMedia>
+                    <CardContent
+                        sx={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            height: '100%',
+                            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            textAlign: 'center',
+                            zIndex: 2,
+                        }}
+                    >
+                        <div>
+                            <Typography
+                                sx={{
+                                    fontStyle: 'italic',
+                                    fontWeight: '300',
+                                    lineHeight: '0.8',
+                                    fontSize: 'h3.fontSize',
+                                    letterSpacing: "-0.05em",
+                                }}
+                                gutterBottom
+                            >
+                                ILLIT Photo Archive
+                            </Typography>
+                            <UploadModal/>
+                        </div>
+                    </CardContent>
+                </Card>
+                {itemData.map((item, index) => (
+                    <Card
+                        key={index}
+                        sx={{
+                            overflow: 'hidden',
+                            '&:hover .image': {
+                                transform: 'scale(1.1)',
+                            }
+                        }}
+                    >
+                        <CardMedia>
+                            <Image
+                                className="image"
+                                src={item.src}
+                                alt={""}
+                                layout="responsive"
+                                width={item.width}
+                                height={item.height}
+                                style={{transition: "transform 0.3s ease-in-out"}}
+                            />
+                        </CardMedia>
+                    </Card>
+                ))}
+            </Masonry>
+        </Container>
+    );
+};
