@@ -4,15 +4,17 @@ import {
     Card,
     CardContent,
     CardMedia,
-    Container, Pagination,
+    Container, IconButton, Pagination,
     Typography,
     useMediaQuery
 } from "@mui/material";
-import {useTheme} from "@mui/material/styles";
+import DeleteIcon from "@mui/icons-material/Delete"
 import {Masonry} from "@mui/lab";
+
 import UploadModal from "@/components/ModalComponent";
 import SearchFilter from "@/components/SearchFilter";
 import PaginationComponent from "@/components/Pagination";
+import DeleteButton from "@/components/DeleteButton";
 
 export default async function Home({searchParams}) {
     const queryString = new URLSearchParams(searchParams).toString();
@@ -102,6 +104,7 @@ export default async function Home({searchParams}) {
                     <Card
                         key={index}
                         sx={{
+                            position: 'relative', // 부모 요소를 기준으로 위치 설정
                             overflow: 'hidden',
                             '&:hover .image': {
                                 transform: 'scale(1.1)',
@@ -122,6 +125,7 @@ export default async function Home({searchParams}) {
                                 />
                             </a>
                         </CardMedia>
+                        <DeleteButton url={item.url}/>
                     </Card>
                 ))}
             </Masonry>
