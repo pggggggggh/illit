@@ -17,7 +17,9 @@ const theme = createTheme({
         },
     },
     typography: {
-        fontFamily: notoSerif.style.fontFamily
+        fontFamily: notoSerif.style.fontFamily,
+        fontWeightRegular: 200,
+
     },
     components: {
     },

@@ -4,7 +4,7 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'assets.teenvogue.com',
+                hostname: 'illit.s3.amazonaws.com',
                 port: '',
                 pathname: '/**',
             },

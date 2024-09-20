@@ -1,35 +1,41 @@
 import Image from "next/image";
 import {
+    Box,
     Card,
     CardContent,
     CardMedia,
-    Container,
+    Container, Pagination,
     Typography,
     useMediaQuery
 } from "@mui/material";
 import {useTheme} from "@mui/material/styles";
 import {Masonry} from "@mui/lab";
 import UploadModal from "@/components/ModalComponent";
+import SearchFilter from "@/components/SearchFilter";
+import PaginationComponent from "@/components/Pagination";
 
-export default function Home() {
-    const itemData = [
-        {
-            src: "https://assets.teenvogue.com/photos/66159ed9db21f3a8c3c35fd1/master/w_1600,c_limit/ILLIT_first%20week_1.jpg",
-            width: 1600,
-            height: 1200,
-            likes: 300,
-        },
-        {
-            src: "https://assets.teenvogue.com/photos/66159eef540395ea08670ec2/2:3/w_1332,h_1998,c_limit/ILLIT_MV%20behind_all.jpg",
-            width: 600,
-            height: 900,
-            likes: 200,
+export default async function Home({searchParams}) {
+    const queryString = new URLSearchParams(searchParams).toString();
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}?${queryString}`, {
+        cache: 'no-store'
+    });
+    const res_json = await res.json();
+    const data = res_json["images"]
+    const total_pages = res_json["total_pages"]
+
+    const handlePageChange = (event, newPage) => {
+        if (typeof window !== 'undefined') {
+            const newUrl = new URL(window.location.href);
+            newUrl.searchParams.set('page', newPage);
+            window.location.href = newUrl.toString();
         }
-    ];
+    };
 
     return (
-        <Container maxWidth="lg" sx={{p: 4}}>
-            <Masonry columns={{xs: 1, sm: 3}} spacing={2}>
+        <Container maxWidth="lg" sx={{}}>
+            <SearchFilter/>
+
+            <Masonry columns={{xs: 1, sm: 3}} spacing={1}>
                 <Card
                     key={100}
                     sx={{
@@ -73,7 +79,7 @@ export default function Home() {
                             <Typography
                                 sx={{
                                     fontStyle: 'italic',
-                                    fontWeight: '300',
+                                    fontWeight: '400',
                                     lineHeight: '0.8',
                                     fontSize: 'h3.fontSize',
                                     letterSpacing: "-0.05em",
@@ -86,7 +92,7 @@ export default function Home() {
                         </div>
                     </CardContent>
                 </Card>
-                {itemData.map((item, index) => (
+                {data.map((item, index) => (
                     <Card
                         key={index}
                         sx={{
@@ -97,10 +103,10 @@ export default function Home() {
                         }}
                     >
                         <CardMedia>
-                            <a href={item.src} download>
+                            <a href={item.url} download target="_self">
                                 <Image
                                     className="image"
-                                    src={item.src}
+                                    src={item.url}
                                     alt={""}
                                     layout="responsive"
                                     width={item.width}
@@ -112,6 +118,9 @@ export default function Home() {
                     </Card>
                 ))}
             </Masonry>
+            <Box display={"flex"} justifyContent={"center"}>
+                <PaginationComponent total_pages={total_pages}/>
+            </Box>
         </Container>
     );
 };
