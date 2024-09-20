@@ -59,7 +59,7 @@ export default async function Home({searchParams}) {
                     <CardMedia>
                         <Image
                             className="image"
-                            src={"https://illit.s3.ap-northeast-2.amazonaws.com/712e0bf1-dfc3-4738-a520-07806ce6b271.webp"}
+                            src={"https://illit.s3.amazonaws.com/712e0bf1-dfc3-4738-a520-07806ce6b271.webp"}
                             alt={""}
                             layout="responsive"
                             width={600}
