@@ -111,6 +111,7 @@ export default async function Home({searchParams}) {
                         <CardMedia>
                             <a href={item.url} download target="_self">
                                 <Image
+                                    key={item.url}
                                     className="image"
                                     src={item.url}
                                     alt={""}
