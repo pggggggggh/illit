@@ -15,6 +15,7 @@ import UploadModal from "@/components/ModalComponent";
 import SearchFilter from "@/components/SearchFilter";
 import PaginationComponent from "@/components/Pagination";
 import DeleteButton from "@/components/DeleteButton";
+import Link from "next/link";
 
 export default async function Home({searchParams}) {
     const queryString = new URLSearchParams(searchParams).toString();
@@ -34,16 +35,17 @@ export default async function Home({searchParams}) {
     };
 
     return (
-        <Container maxWidth="lg" sx={{}}>
+        <Container maxWidth="xl" sx={{}}>
             <SearchFilter/>
 
             <Masonry
-                columns={{xs: 1, sm: 3}}
+                columns={{xs: 1, sm: 3, lg:4}}
                 spacing={1}
                 defaultHeight={5000}
                 defaultColumns={3}
                 defaultSpacing={1}
             >
+
                 <Card
                     key={100}
                     sx={{
@@ -55,6 +57,7 @@ export default async function Home({searchParams}) {
                     }}
                 >
                     <CardMedia>
+
                         <Image
                             className="image"
                             src={"/images/hero.png"}
@@ -84,18 +87,20 @@ export default async function Home({searchParams}) {
                         }}
                     >
                         <Box>
-                            <Typography
-                                sx={{
-                                    fontStyle: 'italic',
-                                    fontWeight: '400',
-                                    lineHeight: '0.8',
-                                    fontSize: 'h3.fontSize',
-                                    letterSpacing: "-0.05em",
-                                }}
-                                gutterBottom
-                            >
-                                ILLIT Photo Archive
-                            </Typography>
+                            <Link href="/" passHref style={{ textDecoration: 'none', color:'inherit' }}>
+                                <Typography
+                                    sx={{
+                                        fontStyle: 'italic',
+                                        fontWeight: '400',
+                                        lineHeight: '0.8',
+                                        fontSize: 'h3.fontSize',
+                                        letterSpacing: "-0.05em",
+                                    }}
+                                    gutterBottom
+                                >
+                                    ILLIT Photo Archive
+                                </Typography>
+                            </Link>
                             <UploadModal/>
                         </Box>
                     </CardContent>
@@ -125,11 +130,25 @@ export default async function Home({searchParams}) {
                                 />
                             </a>
                         </CardMedia>
-                        <DeleteButton url={item.url}/>
+                        {/*<DeleteButton url={item.url} />*/}
+                        <Box
+                            sx={{
+                                position: 'absolute',
+                                bottom: 0,
+                                right: 0,
+                                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                color: 'white',
+                                px: '5px',
+                                py: '2px',
+                                fontSize: '12px',
+                            }}
+                        >
+                            {item.width} x {item.height}
+                        </Box>
                     </Card>
                 ))}
             </Masonry>
-            <Box display={"flex"} justifyContent={"center"} mb={3}>
+            <Box display={"flex"} justifyContent={"center"} mb={10}>
                 <PaginationComponent total_pages={total_pages}/>
             </Box>
         </Container>
