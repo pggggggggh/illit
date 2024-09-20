@@ -15,7 +15,6 @@ import SearchFilter from "@/components/SearchFilter";
 import PaginationComponent from "@/components/Pagination";
 
 export default async function Home({searchParams}) {
-    console.log(process.env.NEXT_PUBLIC_API_URL);
     const queryString = new URLSearchParams(searchParams).toString();
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}?${queryString}`, {
         cache: 'no-store'
