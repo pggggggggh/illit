@@ -38,7 +38,7 @@ export default function SearchFilter() {
     const [selectedMembers, setSelectedMembers] = useState(
         searchParams.get("members") ? searchParams.get("members").split(",") : []
     );
-    const [tag, setTag] = useState("");
+    const [tag, setTag] = useState(searchParams.get("tags") ? searchParams.get("tags").split(",") : []);
 
     const handleMemberChange = (event) => {
         const { value, checked } = event.target;
@@ -54,6 +54,7 @@ export default function SearchFilter() {
         setSelectedMembers(newSelectedMembers);
 
         const params = new URLSearchParams(searchParams);
+        params.delete("page")
         if (newSelectedMembers.length > 0) {
             params.set("members", newSelectedMembers.join(","));
         } else {
@@ -61,19 +62,21 @@ export default function SearchFilter() {
         }
 
         router.push(`?${params.toString()}`);
+        // window.location.href = `?${params.toString()}`;
     };
 
     const handleTagChange = (event) => {
         const {value} = event.target;
         const params = new URLSearchParams(searchParams);
         setTag(value);
+        params.delete("page")
         if (value !== "") {
             params.set("tags", value);
         } else {
             params.delete("tags");
         }
-
         router.push(`?${params.toString()}`);
+        // window.location.href = `?${params.toString()}`;
     };
 
     return (

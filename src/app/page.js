@@ -35,7 +35,13 @@ export default async function Home({searchParams}) {
         <Container maxWidth="lg" sx={{}}>
             <SearchFilter/>
 
-            <Masonry columns={{xs: 1, sm: 3}} spacing={1}>
+            <Masonry
+                columns={{xs: 1, sm: 3}}
+                spacing={1}
+                defaultHeight={5000}
+                defaultColumns={3}
+                defaultSpacing={1}
+            >
                 <Card
                     key={100}
                     sx={{
@@ -75,7 +81,7 @@ export default async function Home({searchParams}) {
                             zIndex: 2,
                         }}
                     >
-                        <div>
+                        <Box>
                             <Typography
                                 sx={{
                                     fontStyle: 'italic',
@@ -89,7 +95,7 @@ export default async function Home({searchParams}) {
                                 ILLIT Photo Archive
                             </Typography>
                             <UploadModal/>
-                        </div>
+                        </Box>
                     </CardContent>
                 </Card>
                 {data.map((item, index) => (
@@ -118,7 +124,7 @@ export default async function Home({searchParams}) {
                     </Card>
                 ))}
             </Masonry>
-            <Box display={"flex"} justifyContent={"center"}>
+            <Box display={"flex"} justifyContent={"center"} mb={3}>
                 <PaginationComponent total_pages={total_pages}/>
             </Box>
         </Container>

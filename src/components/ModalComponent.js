@@ -11,20 +11,25 @@ import {
     FormGroup, Grid2,
     IconButton,
     Modal,
-    Paper,
+    Paper, Snackbar,
     Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import {Alert} from "@mui/lab";
 
 const memberList = ["YUNAH", "MINJU", "MOKA", "WONHEE", "IROHA"];
 
 const UploadModal = () => {
     const [open, setOpen] = useState(false);
+    const [alertOpen, setAlertOpen] = React.useState(false);
     const [images, setImages] = useState([]);
     const [selectedMembers, setSelectedMembers] = useState([]);
+    const [files, setFiles] = useState([]);
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const handleAlertClose = () => setAlertOpen(false);
+
 
     const handleCheckboxChange = (event) => {
         const { value, checked } = event.target;
@@ -52,20 +57,26 @@ const UploadModal = () => {
         });
 
         try {
-            const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/upload", {
+            fetch(process.env.NEXT_PUBLIC_API_URL + "/upload", {
                 method: "POST",
                 body: formData,
-            });
-            const result = await response.json();
-            console.log(result);
+            })
+                .then((response) => response.json())
+                .then((result) => {
+                    console.log(result);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+            setAlertOpen(true);
+            setImages([]);
+            setSelectedMembers([]);
+            setFiles([]);
+            setOpen(false);
         } catch (error) {
             console.error(error);
         }
-
-        window.location.reload()
     };
-
-    const [files, setFiles] = useState([]);
 
     const onDrop = useCallback((acceptedFiles) => {
         const mappedFiles = acceptedFiles.map((file) => ({
@@ -97,11 +108,28 @@ const UploadModal = () => {
             'image/webp': [],
         },
         maxSize: 20 * 1024 * 1024,
-        maxFiles: 20,
+        maxFiles: 30,
     });
 
     return (
         <>
+            <div>
+                <Snackbar
+                open={alertOpen}
+                autoHideDuration={5000}
+                onClose={handleAlertClose}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+            >
+                    <Alert
+                        onClose={handleAlertClose}
+                        severity="success"
+                        variant="filled"
+                        sx={{width: '100%', color: 'white'}}
+                    >
+                        Your images will be uploaded shortly!
+                    </Alert>
+                </Snackbar>
+            </div>
             <Button variant="contained" onClick={handleOpen}>
                 Upload
             </Button>
@@ -126,7 +154,8 @@ const UploadModal = () => {
                         alignItems: 'center',
                         justifyContent: 'center'
                     }}>
-                        <Typography mb={3}>Note that uploading Weverse DM images are prohibited!<br />Up to 20MB & 20 files at once</Typography>
+                        <Typography mb={3}>Note that uploading Weverse DM images are prohibited!<br/>Up to 20MB & 30
+                            files at once</Typography>
 
                         <Box sx={{width: "100%", mb: 5}}>
                             <Box
