@@ -62,6 +62,7 @@ export default async function Home({searchParams}) {
                             src={"https://illit.s3.amazonaws.com/712e0bf1-dfc3-4738-a520-07806ce6b271.webp"}
                             alt={""}
                             layout="responsive"
+                            unoptimized
                             width={600}
                             height={900}
                             style={{
@@ -123,6 +124,7 @@ export default async function Home({searchParams}) {
                                     src={item.url}
                                     alt={""}
                                     layout="responsive"
+                                    unoptimized
                                     width={item.width}
                                     height={item.height}
                                     style={{transition: "transform 0.3s ease-in-out"}}
