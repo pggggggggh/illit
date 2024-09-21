@@ -39,7 +39,7 @@ export default async function Home({searchParams}) {
             <SearchFilter/>
 
             <Masonry
-                columns={{xs: 1, sm: 3, lg:4}}
+                columns={{xs: 1, sm: 3, lg: 4}}
                 spacing={1}
                 defaultHeight={5000}
                 defaultColumns={4}
@@ -87,7 +87,7 @@ export default async function Home({searchParams}) {
                         }}
                     >
                         <Box>
-                            <Link href="/" passHref style={{ textDecoration: 'none', color:'inherit' }}>
+                            <Link href="/" passHref style={{textDecoration: 'none', color: 'inherit'}}>
                                 <Typography
                                     sx={{
                                         fontStyle: 'italic',
@@ -150,9 +150,8 @@ export default async function Home({searchParams}) {
                     </Card>
                 ))}
             </Masonry>
-            <Box display={"flex"} justifyContent={"center"}  mb={10}>
-                <PaginationComponent total_pages={total_pages}/>
-            </Box>
+
+            <PaginationComponent total_pages={total_pages}/>
         </Container>
     );
 };

@@ -2,7 +2,8 @@
 
 import { useRouter, useSearchParams } from 'next/navigation';
 import Pagination from '@mui/material/Pagination';
-import {Box} from "@mui/material";
+import {Box, IconButton} from "@mui/material";
+import ShuffleIcon from '@mui/icons-material/Shuffle';
 
 const PaginationComponent = ({total_pages}) => {
     const router = useRouter();
@@ -18,6 +19,7 @@ const PaginationComponent = ({total_pages}) => {
     };
 
     return (
+        <Box display={"flex"} justifyContent={"center"} alignItems={"center"} flexDirection={"column"} mb={10}>
             <Pagination
                 page={currentPage}
                 count={total_pages}
@@ -28,6 +30,13 @@ const PaginationComponent = ({total_pages}) => {
                 siblingCount={2}
                 boundaryCount={1}
             />
+            <IconButton
+                value={-1}
+                onClick={(event) => handlePageChange(event, -1)}
+            >
+                <ShuffleIcon></ShuffleIcon>
+            </IconButton>
+        </Box>
     );
 };
 
