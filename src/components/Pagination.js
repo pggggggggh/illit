@@ -18,9 +18,7 @@ const PaginationComponent = ({total_pages}) => {
     };
 
     return (
-        <Box display="flex" justifyContent="center" style={{maxWidth: '100%', width: '100%', overflowX: 'auto'}}>
             <Pagination
-                size={"small"}
                 page={currentPage}
                 count={total_pages}
                 variant="outlined"
@@ -29,9 +27,7 @@ const PaginationComponent = ({total_pages}) => {
                 onChange={handlePageChange}
                 siblingCount={2}
                 boundaryCount={1}
-                showFirstButton
             />
-        </Box>
     );
 };
 

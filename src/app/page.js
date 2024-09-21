@@ -150,7 +150,7 @@ export default async function Home({searchParams}) {
                     </Card>
                 ))}
             </Masonry>
-            <Box display={"flex"} justifyContent={"center"} mb={10}>
+            <Box display={"flex"} justifyContent={"center"}  mb={10}>
                 <PaginationComponent total_pages={total_pages}/>
             </Box>
         </Container>
