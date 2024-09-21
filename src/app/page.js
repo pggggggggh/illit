@@ -42,7 +42,7 @@ export default async function Home({searchParams}) {
                 columns={{xs: 1, sm: 3, lg:4}}
                 spacing={1}
                 defaultHeight={5000}
-                defaultColumns={3}
+                defaultColumns={4}
                 defaultSpacing={1}
             >
 

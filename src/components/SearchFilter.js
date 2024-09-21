@@ -64,8 +64,8 @@ export default function SearchFilter() {
             params.delete("members");
         }
 
-        router.push(`?${params.toString()}`);
-        // window.location.href = `?${params.toString()}`;
+        // router.push(`?${params.toString()}`);
+        window.location.href = `?${params.toString()}`;
     };
 
     const handleTagChange = (event) => {
@@ -78,8 +78,8 @@ export default function SearchFilter() {
         } else {
             params.delete("tags");
         }
-        router.push(`?${params.toString()}`);
-        // window.location.href = `?${params.toString()}`;
+        // router.push(`?${params.toString()}`);
+        window.location.href = `?${params.toString()}`;
     };
 
     return (

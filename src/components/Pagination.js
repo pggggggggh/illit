@@ -2,6 +2,7 @@
 
 import { useRouter, useSearchParams } from 'next/navigation';
 import Pagination from '@mui/material/Pagination';
+import {Box} from "@mui/material";
 
 const PaginationComponent = ({total_pages}) => {
     const router = useRouter();
@@ -12,17 +13,25 @@ const PaginationComponent = ({total_pages}) => {
         const params = new URLSearchParams(searchParams);
         params.set('page', value);
 
-        router.push(`?${params.toString()}`);
+        window.location.href = `?${params.toString()}`;
+        // router.push(`?${params.toString()}`);
     };
 
     return (
-        <Pagination
-            page={currentPage}
-            count={total_pages}
-            variant="outlined"
-            color="secondary"
-            onChange={handlePageChange}
-        />
+        <Box display="flex" justifyContent="center" style={{maxWidth: '100%', width: '100%', overflowX: 'auto'}}>
+            <Pagination
+                size={"small"}
+                page={currentPage}
+                count={total_pages}
+                variant="outlined"
+                shape="rounded"
+                color="secondary"
+                onChange={handlePageChange}
+                siblingCount={2}
+                boundaryCount={1}
+                showFirstButton
+            />
+        </Box>
     );
 };
 
