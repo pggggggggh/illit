@@ -5,7 +5,7 @@ import { useDropzone } from "react-dropzone";
 import {
     Box,
     Button,
-    Checkbox,
+    Checkbox, Dialog,
     FormControl,
     FormControlLabel,
     FormGroup, Grid2,
@@ -69,10 +69,11 @@ const UploadModal = () => {
                     console.error(error);
                 });
             setAlertOpen(true);
+            setOpen(false);
             setImages([]);
             setSelectedMembers([]);
             setFiles([]);
-            setOpen(false);
+
         } catch (error) {
             console.error(error);
         }
@@ -133,18 +134,19 @@ const UploadModal = () => {
             <Button variant="contained" onClick={handleOpen}>
                 Upload
             </Button>
-            <Modal
+            <Dialog
+                // sx={{overflowY: 'scroll' }}
                 open={open}
                 onClose={handleClose}
             >
                 <Box
                     sx={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        width: '90%',
-                        maxWidth: 600
+                        // position: 'absolute',
+                        // top: '50%',
+                        // left: '50%',
+                        // transform: 'translate(-50%, -50%)',
+                        // width: '90%',
+                        // maxWidth: 600
                     }}
                 >
                     <Paper sx={{
@@ -252,7 +254,7 @@ const UploadModal = () => {
                         </Button>
                     </Paper>
                 </Box>
-            </Modal>
+            </Dialog>
         </>
     );
 };

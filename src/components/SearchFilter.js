@@ -2,7 +2,7 @@
 
 import {Box, Checkbox, FormControl, FormControlLabel, FormGroup, InputLabel, MenuItem, Select} from "@mui/material";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 
 const memberList = ["YUNAH", "MINJU", "MOKA", "WONHEE", "IROHA"];
 const tagList = [
@@ -35,10 +35,13 @@ const tagList = [
 export default function SearchFilter() {
     const router = useRouter();
     const searchParams = useSearchParams();
-    const [selectedMembers, setSelectedMembers] = useState(
-        searchParams.get("members") ? searchParams.get("members").split(",") : []
-    );
-    const [tag, setTag] = useState(searchParams.get("tags") ? searchParams.get("tags").split(",") : []);
+    const [selectedMembers, setSelectedMembers] = useState([]);
+    const [tag, setTag] = useState([]);
+
+    useEffect(() => {
+        setSelectedMembers(searchParams.get("members") ? searchParams.get("members").split(",") : []);
+        setTag(searchParams.get("tags") ? searchParams.get("tags").split(",") : []);
+    }, [searchParams]);
 
     const handleMemberChange = (event) => {
         const { value, checked } = event.target;
