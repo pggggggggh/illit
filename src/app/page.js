@@ -122,8 +122,18 @@ export default async function Home({searchParams}) {
                                     key={item.url}
                                     className="image"
                                     src={item.url}
-                                    alt={"ILLIT " + item.members.toLowerCase() + " " + item.desc}
-                                    title={"ILLIT " + item.members.toLowerCase() + " " + item.desc}
+                                    alt={"ILLIT " +
+                                        item.members
+                                            .split(',')
+                                            .map(name => name.charAt(0).toUpperCase() + name.slice(1).toLowerCase())
+                                            .join(', ')
+                                        + " " + item.desc}
+                                    title={"ILLIT " +
+                                        item.members
+                                            .split(',')
+                                            .map(name => name.charAt(0).toUpperCase() + name.slice(1).toLowerCase())
+                                            .join(', ')
+                                        + " " + item.desc}
                                     layout="responsive"
                                     unoptimized
                                     width={item.width}
