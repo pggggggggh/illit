@@ -122,7 +122,8 @@ export default async function Home({searchParams}) {
                                     key={item.url}
                                     className="image"
                                     src={item.url}
-                                    alt={""}
+                                    alt={"ILLIT " + item.members.toLowerCase() + " " + item.desc}
+                                    title={"ILLIT " + item.members.toLowerCase() + " " + item.desc}
                                     layout="responsive"
                                     unoptimized
                                     width={item.width}
