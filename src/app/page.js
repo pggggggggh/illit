@@ -87,7 +87,7 @@ export default async function Home({searchParams}) {
                         }}
                     >
                         <Box>
-                            <Link href="/" passHref style={{textDecoration: 'none', color: 'inherit'}}>
+                            <a href="/" style={{textDecoration: 'none', color: 'inherit'}}>
                                 <Typography
                                     sx={{
                                         fontStyle: 'italic',
@@ -100,7 +100,7 @@ export default async function Home({searchParams}) {
                                 >
                                     ILLIT Photo Archive
                                 </Typography>
-                            </Link>
+                            </a>
                             <UploadModal/>
                         </Box>
                     </CardContent>
