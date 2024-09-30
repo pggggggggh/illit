@@ -8,7 +8,7 @@ import ShuffleIcon from '@mui/icons-material/Shuffle';
 const PaginationComponent = ({total_pages}) => {
     const router = useRouter();
     const searchParams = useSearchParams();
-    const currentPage = parseInt(searchParams.get('page')) || 1;
+    const currentPage = parseInt(searchParams.get('page')) || -1;
 
     const handlePageChange = (event, value) => {
         const params = new URLSearchParams(searchParams);
